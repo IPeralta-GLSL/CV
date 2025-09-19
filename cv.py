@@ -32,7 +32,7 @@ pdf.add_page()
 pdf.image("photo_2024-08-01_23-15-53.jpg", x=170, y=30, w=30)
 
 pdf.chapter_title("Personal Information")
-pdf.chapter_body("Name: Ignacio Peralta\nProfession: Software Programmer\nEmail: peraltaignacio64@gmail.com\nPhone: +54 1130613117")
+pdf.chapter_body("Name: Ignacio Peralta\nProfession: Software Programmer\nEmail: peraltaignacio64@gmail.com\nPhone: +54 1130613117\nCurrently studying: Técnico Superior en Programación at Teclab")
 
 # About Me
 pdf.chapter_title("About Me")
