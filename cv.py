@@ -70,7 +70,7 @@ pdf.set_fill_color(45, 87, 44)
 #pdf.chapter_body("- Multiplayer - Optimization - Cynamatics - Tools For Develop")
 
 pdf.chapter_title("Languages, Technologies, and Frameworks")
-pdf.chapter_body("- C - C++ - C# - Rust - Python - Lua - Javascript - GLSL\n- OpenGL - OpenCL - CUDA - Assimp - Numpy - TensorFlow - PyTorch - OpenCV - FFmpeg\n- Unreal Engine - Godot Engine - Open 3D Engine - Unity Engine - Qt framework - .Net - Android Studio")
+pdf.chapter_body("- C - C++ - C# - Rust - Python - Lua - Javascript - GLSL\n- OpenGL - Vulkan - DirectX 12 - OpenCL - CUDA - Assimp - Numpy - TensorFlow - PyTorch - OpenCV - FFmpeg\n- Unreal Engine - Godot Engine - Open 3D Engine - Unity Engine - Qt framework - .Net - Android Studio")
 
 #pdf.chapter_body("- Unreal Engine - Godot Engine - Open 3D Engine - Unity Engine - Qt framework - .Net - Android Studio")
 
