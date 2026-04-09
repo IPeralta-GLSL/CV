@@ -1,45 +1,63 @@
-from fpdf import FPDF
+from fpdf import FPDF, XPos, YPos
 
 class PDF(FPDF):
     def header(self):
         self.set_fill_color(240, 248, 239)  # Fondo verde muy claro
         self.rect(0, 0, 210, 297, 'F')
 
-        self.set_font("Arial", "B", 16)
+        self.set_font("Helvetica", "B", 16)
         self.set_text_color(255, 255, 255)  # Blanco sobre verde
         self.set_fill_color(45, 87, 44)  # Verde oscuro para el título
 
         margin = 80
         self.set_x(margin)
-        self.cell(210 - margin * 2, 12, "Curriculum Vitae", 0, 1, "C", 1)
+        self.cell(210 - margin * 2, 12, "Curriculum Vitae", new_x=XPos.LMARGIN, new_y=YPos.NEXT, align="C", fill=True)
         self.ln(6)
 
     def chapter_title(self, title):
         # Jump to next page if we're near the bottom
         if self.get_y() > self.h - self.b_margin - 20:
             self.add_page()
-        self.set_font("Arial", "B", 14)
+        self.set_font("Helvetica", "B", 14)
         self.set_fill_color(45, 87, 44)  # Verde oscuro principal
         self.set_text_color(255, 255, 255)  # Blanco para contraste
-        self.cell(0, 10, title, 0, 1, "L", 1)
+        self.cell(0, 10, title, new_x=XPos.LMARGIN, new_y=YPos.NEXT, align="L", fill=True)
         self.ln(4)
 
     def chapter_body(self, body):
-        self.set_font("Arial", "", 10)
+        self.set_font("Helvetica", "", 10)
         self.set_text_color(50, 60, 50)  # Gris oscuro verdoso, legible
         self.multi_cell(0, 6, body)
         self.ln()
+
+    def info_row(self, label, value, reserved_right=0):
+        self.set_x(self.l_margin)  # siempre empezar desde el margen izquierdo
+        self.set_text_color(50, 60, 50)
+        label_w = 48
+        value_w = self.w - self.l_margin - self.r_margin - label_w - reserved_right
+        self.set_font("Helvetica", "B", 10)
+        self.cell(label_w, 6, label)
+        self.set_font("Helvetica", "", 10)
+        self.multi_cell(value_w, 6, value)
 
 pdf = PDF()
 
 # Personal Information
 pdf.add_page()
 
-# profile image
-pdf.image("photo_2024-08-01_23-15-53.jpg", x=170, y=42, w=30)
+# profile image: x=168 → flush al margen derecho (168+32=200=210-10)
+# reserved_right=37 → texto termina en x=163, gap de 5mm antes de la foto
+pdf.image("photo_2024-08-01_23-15-53.jpg", x=168, y=48, w=32)
 
 pdf.chapter_title("Personal Information")
-pdf.chapter_body("Name: Ignacio Peralta\nProfession: Software Programmer\nEmail: peraltaignacio64@gmail.com\nPhone: +54 1130613117\nCurrently studying: Técnico Superior en Programación at Teclab")
+pdf.info_row("Name: ", "Ignacio Peralta", reserved_right=37)
+pdf.info_row("Profession: ", "Software Programmer", reserved_right=37)
+pdf.info_row("Email: ", "peraltaignacio64@gmail.com", reserved_right=37)
+pdf.info_row("Phone: ", "+54 1130613117", reserved_right=37)
+pdf.info_row("LinkedIn: ", "https://www.linkedin.com/in/ignacio-peralta-768396174/", reserved_right=37)
+pdf.info_row("Website: ", "https://www.ignacioperalta.com/", reserved_right=37)
+pdf.info_row("Currently studying: ", "Técnico Superior en Programación at Teclab", reserved_right=37)
+pdf.ln(4)
 
 # About Me
 pdf.chapter_title("About Me")
@@ -68,6 +86,6 @@ pdf.chapter_body("- GC-Properties S.A (november 2024 - Currently)\n - Grupo Chan
 
 # Some of My Projects
 pdf.chapter_title("Some of My Projects")
-pdf.chapter_body("- Between us (Frantic action shooter Cyberpunk game in first and third person)\n- Bullet Time Launcher (Launcher and store for Games of Bullet Time)\n- Unreal Boost Compile (Tool For Unreal engine to improve the speed fo shader and lighting compilation)\n- Flag Pit (Multiplayer Deathmatch Melee game)\n- Vulcano (NFT Multiplayer game made with Unreal Engine 5)\n\nTo see all my works: https://www.ignacioperalta.com/")
+pdf.chapter_body("- Between us (Frantic action shooter Cyberpunk game in first and third person)\n- Bullet Time Launcher (Launcher and store for Games of Bullet Time)\n- Unreal Boost Compile (Tool For Unreal engine to improve the speed fo shader and lighting compilation)\n- Flag Pit (Multiplayer Deathmatch Melee game)\n- Vulcano (NFT Multiplayer game made with Unreal Engine 5)")
 
 pdf.output("Ignacio_Peralta_CV.pdf")
