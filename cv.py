@@ -15,6 +15,9 @@ class PDF(FPDF):
         self.ln(6)
 
     def chapter_title(self, title):
+        # Jump to next page if we're near the bottom
+        if self.get_y() > self.h - self.b_margin - 20:
+            self.add_page()
         self.set_font("Arial", "B", 14)
         self.set_fill_color(45, 87, 44)  # Verde oscuro principal
         self.set_text_color(255, 255, 255)  # Blanco para contraste
