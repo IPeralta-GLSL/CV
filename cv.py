@@ -5,10 +5,14 @@ class PDF(FPDF):
         self.set_fill_color(240, 248, 239)  # Fondo verde muy claro
         self.rect(0, 0, 210, 297, 'F')
 
-        self.set_font("Arial", "B", 14)
+        self.set_font("Arial", "B", 16)
         self.set_text_color(255, 255, 255)  # Blanco sobre verde
         self.set_fill_color(45, 87, 44)  # Verde oscuro para el título
-        self.cell(0, 10, "Curriculum Vitae", 0, 1, "C", 1)
+
+        margin = 80
+        self.set_x(margin)
+        self.cell(210 - margin * 2, 12, "Curriculum Vitae", 0, 1, "C", 1)
+        self.ln(6)
 
     def chapter_title(self, title):
         self.set_font("Arial", "B", 14)
@@ -29,7 +33,7 @@ pdf = PDF()
 pdf.add_page()
 
 # profile image
-pdf.image("photo_2024-08-01_23-15-53.jpg", x=170, y=30, w=30)
+pdf.image("photo_2024-08-01_23-15-53.jpg", x=170, y=42, w=30)
 
 pdf.chapter_title("Personal Information")
 pdf.chapter_body("Name: Ignacio Peralta\nProfession: Software Programmer\nEmail: peraltaignacio64@gmail.com\nPhone: +54 1130613117\nCurrently studying: Técnico Superior en Programación at Teclab")
