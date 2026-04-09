@@ -2,24 +2,24 @@ from fpdf import FPDF
 
 class PDF(FPDF):
     def header(self):
-        self.set_fill_color(245, 247, 250)  # Fondo muy claro
+        self.set_fill_color(240, 248, 239)  # Fondo verde muy claro
         self.rect(0, 0, 210, 297, 'F')
 
         self.set_font("Arial", "B", 14)
-        self.set_text_color(44, 62, 80)  # Azul grisáceo oscuro
-        self.set_fill_color(100, 149, 237)  # Azul suave para el título
+        self.set_text_color(255, 255, 255)  # Blanco sobre verde
+        self.set_fill_color(45, 87, 44)  # Verde oscuro para el título
         self.cell(0, 10, "Curriculum Vitae", 0, 1, "C", 1)
 
     def chapter_title(self, title):
         self.set_font("Arial", "B", 14)
-        self.set_fill_color(230, 236, 240)  # Gris azulado claro
-        self.set_text_color(52, 73, 94)  # Gris oscuro
+        self.set_fill_color(45, 87, 44)  # Verde oscuro principal
+        self.set_text_color(255, 255, 255)  # Blanco para contraste
         self.cell(0, 10, title, 0, 1, "L", 1)
         self.ln(4)
 
     def chapter_body(self, body):
         self.set_font("Arial", "", 10)
-        self.set_text_color(44, 62, 80)  # Azul grisáceo oscuro
+        self.set_text_color(50, 60, 50)  # Gris oscuro verdoso, legible
         self.multi_cell(0, 6, body)
         self.ln()
 
@@ -28,7 +28,7 @@ pdf = PDF()
 # Personal Information
 pdf.add_page()
 
-# Add profile image
+# profile image
 pdf.image("photo_2024-08-01_23-15-53.jpg", x=170, y=30, w=30)
 
 pdf.chapter_title("Personal Information")
@@ -39,7 +39,7 @@ pdf.chapter_title("About Me")
 pdf.chapter_body("I'm a software developer from Argentina with a strong passion for programming, particularly in the realm of graphics development. Over the course of my career, I've embarked on diverse projects, ranging from video games and mobile apps to bots, websites, and various development tools. My expertise in graphics programming includes working with technologies like Vulkan and DirectX, as well as advanced techniques in rendering, VFX, shader programming, offline and real-time graphics optimization.\n\nI have a solid foundation in transforming innovative ideas into tangible and functional visual experiences. My experience spans various aspects of graphics development, including offline and real-time rendering, image processing, and graphics engine design.\n\nCollaboration and teamwork are values I hold dear, and I thrive in dynamic, agile environments. My adaptability to change and commitment to delivering results make me a valuable asset to any project or team, especially those focused on cutting-edge graphics technologies and innovative visual solutions.")
 
 # Skills, Languages, Frameworks, APIs, and Platforms
-pdf.set_fill_color(40, 44, 52)
+pdf.set_fill_color(45, 87, 44)
 
 #pdf.chapter_title("Skills")
 #pdf.chapter_body("- Multiplayer - Optimization - Cynamatics - Tools For Develop")
